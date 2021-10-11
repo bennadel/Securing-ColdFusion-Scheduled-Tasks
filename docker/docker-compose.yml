@@ -1,0 +1,17 @@
+version: "2.4"
+
+services:
+
+  lucee:
+    container_name: "lucee"
+    build: "../lucee"
+    volumes:
+      - "../lucee/app:/var/www"
+    ports:
+      # Defined as "HOST:CONTAINER" . In this demo container, we have NGINX sitting as a
+      # reverse proxy in front of TOMCAT. And, we're only exposing the non-secure HTTP
+      # port 80. Tomcat is listening on port 8888, which is not exposed by the container.
+      # Meaning, no PUBLIC INGRESS into this container can hit Tomcat directly.
+      - "80:80"
+    environment:
+      - "TASK_PASSWORD=ColdFusionIsLife!"
